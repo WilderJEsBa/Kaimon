@@ -5,6 +5,12 @@
  */
 package Frontera;
 
+import Control.ValidarLogin;
+import DAO.LocalDAO;
+import Entidad.Local;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Mauricio
@@ -12,6 +18,8 @@ package Frontera;
 public class FramePrincipal extends javax.swing.JFrame {
 
     private GestionProductos gestionProductos = new GestionProductos();
+    private GestionInventario gestionInventario = new GestionInventario();
+    private GestionLocal gestionLocal = new GestionLocal();
     
     /**
      * Creates new form FramePrincipal
@@ -30,10 +38,12 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         panelPrincipal = new javax.swing.JPanel();
-        panelPortada = new javax.swing.JPanel();
-        nombreLocalL = new javax.swing.JLabel();
-        direccionLocalL = new javax.swing.JLabel();
-        contactoLocalL = new javax.swing.JLabel();
+        panelLogin = new javax.swing.JPanel();
+        administradorL = new javax.swing.JLabel();
+        administradorTF = new javax.swing.JTextField();
+        contraseniaL = new javax.swing.JLabel();
+        contraseniaPF = new javax.swing.JPasswordField();
+        ingresarB = new javax.swing.JButton();
         panelMenu = new javax.swing.JPanel();
         menuToolBaar = new javax.swing.JToolBar();
         gestionProductosB = new javax.swing.JButton();
@@ -50,50 +60,62 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         panelPrincipal.setLayout(new java.awt.BorderLayout());
 
-        nombreLocalL.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
-        nombreLocalL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nombreLocalL.setText("Nombre de local");
+        administradorL.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        administradorL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        administradorL.setText("Administrador");
 
-        direccionLocalL.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        direccionLocalL.setText("Dirección");
+        contraseniaL.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        contraseniaL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        contraseniaL.setText("Contraseña");
 
-        contactoLocalL.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        contactoLocalL.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        contactoLocalL.setText("Contacto");
+        ingresarB.setText("Ingresar");
+        ingresarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingresarBActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout panelPortadaLayout = new javax.swing.GroupLayout(panelPortada);
-        panelPortada.setLayout(panelPortadaLayout);
-        panelPortadaLayout.setHorizontalGroup(
-            panelPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPortadaLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelLoginLayout = new javax.swing.GroupLayout(panelLogin);
+        panelLogin.setLayout(panelLoginLayout);
+        panelLoginLayout.setHorizontalGroup(
+            panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLoginLayout.createSequentialGroup()
+                .addGap(295, 295, 295)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(contraseniaPF)
+                    .addComponent(contraseniaL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(administradorTF, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(administradorL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                .addContainerGap(295, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLoginLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ingresarB, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelLoginLayout.setVerticalGroup(
+            panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLoginLayout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(administradorL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(administradorTF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(contraseniaL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contraseniaPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addGroup(panelPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nombreLocalL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelPortadaLayout.createSequentialGroup()
-                        .addComponent(direccionLocalL, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)
-                        .addComponent(contactoLocalL, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34))
-        );
-        panelPortadaLayout.setVerticalGroup(
-            panelPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPortadaLayout.createSequentialGroup()
-                .addContainerGap(154, Short.MAX_VALUE)
-                .addComponent(nombreLocalL, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90)
-                .addGroup(panelPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(direccionLocalL, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contactoLocalL, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(153, 153, 153))
+                .addComponent(ingresarB, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
-        panelPrincipal.add(panelPortada, java.awt.BorderLayout.CENTER);
+        panelPrincipal.add(panelLogin, java.awt.BorderLayout.CENTER);
 
         menuToolBaar.setRollover(true);
         menuToolBaar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
         gestionProductosB.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         gestionProductosB.setText("Gestión de productos");
+        gestionProductosB.setEnabled(false);
         gestionProductosB.setFocusable(false);
         gestionProductosB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gestionProductosB.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -106,20 +128,33 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         gestionInventarioB.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         gestionInventarioB.setText("Gestión de inventario");
+        gestionInventarioB.setEnabled(false);
         gestionInventarioB.setFocusable(false);
         gestionInventarioB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gestionInventarioB.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        gestionInventarioB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionInventarioBActionPerformed(evt);
+            }
+        });
         menuToolBaar.add(gestionInventarioB);
 
         gestionLocalB.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         gestionLocalB.setText("Gestión del Local");
+        gestionLocalB.setEnabled(false);
         gestionLocalB.setFocusable(false);
         gestionLocalB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gestionLocalB.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        gestionLocalB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionLocalBActionPerformed(evt);
+            }
+        });
         menuToolBaar.add(gestionLocalB);
 
         pedidosB.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         pedidosB.setText("Pedidos");
+        pedidosB.setEnabled(false);
         pedidosB.setFocusable(false);
         pedidosB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         pedidosB.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -127,6 +162,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         estadisticasB.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         estadisticasB.setText("Estadísticas");
+        estadisticasB.setEnabled(false);
         estadisticasB.setFocusable(false);
         estadisticasB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         estadisticasB.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -174,6 +210,37 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelPrincipal.setVisible(true);
     }//GEN-LAST:event_gestionProductosBActionPerformed
 
+    private void gestionInventarioBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionInventarioBActionPerformed
+        panelPrincipal.setVisible(false);
+        panelPrincipal.removeAll();
+        panelPrincipal.add(gestionInventario);
+        panelPrincipal.setVisible(true);
+    }//GEN-LAST:event_gestionInventarioBActionPerformed
+
+    private void ingresarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarBActionPerformed
+        Local local = new Local();
+        local.setNombreAdministrador(administradorTF.getText());
+        local.setContraseña(String.copyValueOf(contraseniaPF.getPassword()));
+        ValidarLogin validar = new ValidarLogin();
+        String resultado = validar.verificarLogin(local);
+        JOptionPane.showMessageDialog(this, resultado, "Información", JOptionPane.INFORMATION_MESSAGE);
+        if(resultado.equals("Ingreso exitoso")){
+            gestionProductosB.setEnabled(true);
+            gestionInventarioB.setEnabled(true);
+            gestionLocalB.setEnabled(true);
+            panelPrincipal.setVisible(false);
+            panelPrincipal.removeAll();
+            panelPrincipal.setVisible(true);
+        }
+    }//GEN-LAST:event_ingresarBActionPerformed
+
+    private void gestionLocalBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionLocalBActionPerformed
+        panelPrincipal.setVisible(false);
+        panelPrincipal.removeAll();
+        panelPrincipal.add(gestionLocal);
+        panelPrincipal.setVisible(true);
+    }//GEN-LAST:event_gestionLocalBActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -210,16 +277,18 @@ public class FramePrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel contactoLocalL;
-    private javax.swing.JLabel direccionLocalL;
+    private javax.swing.JLabel administradorL;
+    private javax.swing.JTextField administradorTF;
+    private javax.swing.JLabel contraseniaL;
+    private javax.swing.JPasswordField contraseniaPF;
     private javax.swing.JButton estadisticasB;
     private javax.swing.JButton gestionInventarioB;
     private javax.swing.JButton gestionLocalB;
     private javax.swing.JButton gestionProductosB;
+    private javax.swing.JButton ingresarB;
     private javax.swing.JToolBar menuToolBaar;
-    private javax.swing.JLabel nombreLocalL;
+    private javax.swing.JPanel panelLogin;
     private javax.swing.JPanel panelMenu;
-    private javax.swing.JPanel panelPortada;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JButton pedidosB;
     // End of variables declaration//GEN-END:variables

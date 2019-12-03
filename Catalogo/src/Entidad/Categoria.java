@@ -2,12 +2,10 @@
 package Entidad;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +16,6 @@ public class Categoria implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigoCategoria;
     private String nombreCategoria;
-    @OneToMany(targetEntity=Producto.class )
-    private ArrayList<Producto> productos;
 
     public int getCodigoCategoria() {
         return codigoCategoria;
@@ -35,14 +31,6 @@ public class Categoria implements Serializable{
 
     public void setNombreCategoria(String nombreCategoria) {
         this.nombreCategoria = nombreCategoria;
-    }
-
-    public ArrayList<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(ArrayList<Producto> productos) {
-        this.productos = productos;
     }
     
 }

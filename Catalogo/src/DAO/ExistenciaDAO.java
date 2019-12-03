@@ -5,8 +5,7 @@
  */
 package DAO;
 
-import Entidad.Categoria;
-import java.util.List;
+import Entidad.Existencia;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NonUniqueResultException;
@@ -15,65 +14,52 @@ import javax.persistence.Query;
 
 /**
  *
- * @author westradab
+ * @author wilde
  */
-public class CategoriaDAO {
+public class ExistenciaDAO {
     
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("CatalogoPU");
-
-    public void crear(Categoria object) {
+    
+    public void crear(Existencia existencia) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try {
-            em.persist(object);
+            em.persist(existencia);
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            em.getTransaction();
         } finally {
             em.close();
         }
     }
-
-    public Categoria leer(Categoria par) {
+    
+    public Existencia leer(Existencia par) {
         EntityManager em = emf.createEntityManager();
-        Categoria categoria = null;
-        Query q = em.createQuery("SELECT u FROM Categoria u "
-                + " WHERE u.nombre LIKE :nombre ")
-                .setParameter("nombre", par.getNombreCategoria());
+        Existencia existencia = null;
+        Query q = em.createQuery(" SELECT u FROM Existencia u " + 
+                " WHERE u.codigoExistencia LIKE :codigoExistencia ")
+                .setParameter("codigoExistencia", par.getCodigoExistencia());
         try {
-            categoria = (Categoria) q.getSingleResult();
+            existencia = (Existencia) q.getSingleResult();
         } catch (NonUniqueResultException e) {
-            categoria = (Categoria) q.getResultList().get(0);
+            existencia = (Existencia) q.getResultList().get(0);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             em.close();
-            return categoria;
+            return existencia;
         }
     }
     
-    public List<Categoria> leer() {
-        EntityManager em = emf.createEntityManager();
-        List<Categoria> categoria = null;
-        Query q = em.createQuery("SELECT u FROM Categoria u ");
-        try {
-            categoria = (List<Categoria>) q.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            em.close();
-            return categoria;
-        }
-    }
-    
-    public boolean actualizar(Categoria objeto) {
+    public boolean actualizar(Existencia object, Existencia nuevoObjeto) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         boolean ret = false;
         try {
-            objeto = leer(objeto);
-            em.merge(objeto);
+            object = leer(object);
+            object.setCantidad(nuevoObjeto.getCantidad());
+            em.merge(object);
             em.getTransaction().commit();
             ret = true;
         } catch (Exception e) {
@@ -84,5 +70,4 @@ public class CategoriaDAO {
             return ret;
         }
     }
-
 }

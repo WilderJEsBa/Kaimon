@@ -17,7 +17,7 @@ public class AgregarProducto {
     
     private ProductoDAO dao = new ProductoDAO();
     
-    public String validarAgregarProducto(Producto producto, Categoria categoria){
+    public String validarAgregarProducto(Producto producto){
         if(!verificarLongitudNombre(producto.getNombreProducto())){
             return ("La longitud del nombre es incorrecta");
         }
@@ -30,7 +30,7 @@ public class AgregarProducto {
         if(!verificarPrecio(producto.getPrecio())){
             return ("El precio es incorrecto");
         }
-        dao.crear(producto,categoria);
+        dao.crear(producto);
         return ("Producto añadido con exito");
     }
     

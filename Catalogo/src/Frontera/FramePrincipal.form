@@ -50,7 +50,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="panelPortada">
+        <Container class="javax.swing.JPanel" name="panelLogin">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Center"/>
@@ -60,61 +60,71 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="nombreLocalL" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="direccionLocalL" min="-2" pref="200" max="-2" attributes="0"/>
-                              <EmptySpace pref="333" max="32767" attributes="0"/>
-                              <Component id="contactoLocalL" min="-2" pref="200" max="-2" attributes="0"/>
-                          </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="contraseniaPF" max="32767" attributes="0"/>
+                          <Component id="contraseniaL" alignment="0" max="32767" attributes="0"/>
+                          <Component id="administradorTF" alignment="0" max="32767" attributes="0"/>
+                          <Component id="administradorL" alignment="0" pref="200" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <EmptySpace pref="295" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="ingresarB" min="-2" pref="140" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="154" max="32767" attributes="0"/>
-                      <Component id="nombreLocalL" min="-2" pref="148" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="direccionLocalL" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
-                          <Component id="contactoLocalL" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                      <Component id="administradorL" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="administradorTF" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="contraseniaL" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="contraseniaPF" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="ingresarB" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace pref="125" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="nombreLocalL">
+            <Component class="javax.swing.JLabel" name="administradorL">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="48" style="1"/>
+                  <Font name="Times New Roman" size="24" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Nombre de local"/>
+                <Property name="text" type="java.lang.String" value="Administrador"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="direccionLocalL">
+            <Component class="javax.swing.JTextField" name="administradorTF">
+            </Component>
+            <Component class="javax.swing.JLabel" name="contraseniaL">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="14" style="0"/>
+                  <Font name="Times New Roman" size="24" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Direcci&#xf3;n"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="contactoLocalL">
+            <Component class="javax.swing.JPasswordField" name="contraseniaPF">
+            </Component>
+            <Component class="javax.swing.JButton" name="ingresarB">
               <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="14" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Contacto"/>
+                <Property name="text" type="java.lang.String" value="Ingresar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ingresarBActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -159,6 +169,7 @@
                   <Font name="Times New Roman" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de productos"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
@@ -173,10 +184,14 @@
                   <Font name="Times New Roman" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de inventario"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gestionInventarioBActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="gestionLocalB">
               <Properties>
@@ -184,10 +199,14 @@
                   <Font name="Times New Roman" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gesti&#xf3;n del Local"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gestionLocalBActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="pedidosB">
               <Properties>
@@ -195,6 +214,7 @@
                   <Font name="Times New Roman" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pedidos"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
@@ -206,6 +226,7 @@
                   <Font name="Times New Roman" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Estad&#xed;sticas"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>

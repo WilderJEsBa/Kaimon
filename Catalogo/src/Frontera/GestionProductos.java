@@ -5,6 +5,11 @@
  */
 package Frontera;
 
+import Control.BuscarProducto;
+import Entidad.Producto;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author wilde
@@ -35,9 +40,10 @@ public class GestionProductos extends javax.swing.JPanel {
         mostrarCategoriasB = new javax.swing.JButton();
         registrarCategoriaB = new javax.swing.JButton();
         registrarProductoB = new javax.swing.JButton();
+        mostrarProductosSP = new javax.swing.JScrollPane();
         panelMostrarProductos = new javax.swing.JPanel();
 
-        PanelMostrarCategorias.setLayout(new java.awt.GridLayout());
+        PanelMostrarCategorias.setLayout(new java.awt.GridLayout(1, 0));
 
         javax.swing.GroupLayout categoriasDialogLayout = new javax.swing.GroupLayout(categoriasDialog.getContentPane());
         categoriasDialog.getContentPane().setLayout(categoriasDialogLayout);
@@ -51,6 +57,11 @@ public class GestionProductos extends javax.swing.JPanel {
         );
 
         buscarProductosB.setText("Buscar");
+        buscarProductosB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarProductosBActionPerformed(evt);
+            }
+        });
 
         buscarProductosTF.setText("producto");
 
@@ -90,7 +101,8 @@ public class GestionProductos extends javax.swing.JPanel {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        panelMostrarProductos.setLayout(new java.awt.GridLayout(2, 4, 5, 5));
+        panelMostrarProductos.setLayout(new java.awt.GridLayout());
+        mostrarProductosSP.setViewportView(panelMostrarProductos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,7 +111,7 @@ public class GestionProductos extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelMostrarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mostrarProductosSP)
                     .addComponent(panelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -109,10 +121,27 @@ public class GestionProductos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelMostrarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addComponent(mostrarProductosSP, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buscarProductosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProductosBActionPerformed
+        String busqueda = buscarProductosTF.getText();
+        BuscarProducto buscar = new BuscarProducto();
+        List<Producto> resultado = buscar.realizarBusqueda(busqueda);
+        
+        for(Producto p : resultado){
+            ProductoPanel panelMostrar = new ProductoPanel();
+            panelMostrar.getNombreL().setText(p.getNombreProducto());
+            panelMostrar.getDescripcionL().setText(p.getDescripcion());
+            panelMostrar.getPrecioL().setText(String.valueOf(p.getPrecio()));
+            panelMostrarProductos.setVisible(false);
+            panelMostrarProductos.add(panelMostrar);
+            panelMostrarProductos.setVisible(true); 
+        }
+        
+    }//GEN-LAST:event_buscarProductosBActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -121,6 +150,7 @@ public class GestionProductos extends javax.swing.JPanel {
     private javax.swing.JTextField buscarProductosTF;
     private javax.swing.JDialog categoriasDialog;
     private javax.swing.JButton mostrarCategoriasB;
+    private javax.swing.JScrollPane mostrarProductosSP;
     private javax.swing.JPanel panelBuscar;
     private javax.swing.JPanel panelMostrarProductos;
     private javax.swing.JButton registrarCategoriaB;

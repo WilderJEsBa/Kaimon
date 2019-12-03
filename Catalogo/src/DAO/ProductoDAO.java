@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import Entidad.Categoria;
 import Entidad.Producto;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -13,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -20,19 +20,17 @@ import javax.persistence.Query;
  */
 public class ProductoDAO {
     
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("CatalogoDB_PU");
-    CategoriaDAO dao = new CategoriaDAO();
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("CatalogoPU");
     
-    public void crear(Producto producto, Categoria categoria) {
+    public void crear(Producto producto) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try {
             em.persist(producto);
-            dao.actualizar(categoria, producto);
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            em.getTransaction();
         } finally {
             em.close();
         }
@@ -42,7 +40,7 @@ public class ProductoDAO {
         EntityManager em = emf.createEntityManager();
         Producto producto = null;
         Query q = em.createQuery("SELECT u FROM Producto u "
-                + " WHERE u.nombre LIKE :nombre ")
+                + " WHERE u.nombreProducto LIKE :nombre ")
                 .setParameter("nombre", par.getNombreProducto());
         try {
             producto = (Producto) q.getSingleResult();
@@ -59,11 +57,11 @@ public class ProductoDAO {
     public List<Producto> leer(String string) {
         EntityManager em = emf.createEntityManager();
         List<Producto> productos = null;
-        Query q = em.createQuery("SELECT u FROM Producto u "
-                + " WHERE u.nombre LIKE %:string% ")
-                .setParameter("string", string);
+        TypedQuery<Producto> q = em.createQuery("SELECT u FROM Producto u "
+                + " WHERE u.nombreProducto LIKE :string ", Producto.class)
+                .setParameter("string", "%"+string+"%");
         try {
-            productos = (List<Producto>) q.getResultList();
+            productos =  q.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

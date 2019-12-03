@@ -5,8 +5,7 @@
  */
 package DAO;
 
-import Entidad.Categoria;
-import java.util.List;
+import Entidad.Local;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NonUniqueResultException;
@@ -15,65 +14,76 @@ import javax.persistence.Query;
 
 /**
  *
- * @author westradab
+ * @author wilde
  */
-public class CategoriaDAO {
+public class LocalDAO {
     
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("CatalogoPU");
-
-    public void crear(Categoria object) {
+    
+    public void crear(Local local) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try {
-            em.persist(object);
+            em.persist(local);
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            em.getTransaction();
         } finally {
             em.close();
         }
     }
-
-    public Categoria leer(Categoria par) {
+    
+    public Local leer() {
         EntityManager em = emf.createEntityManager();
-        Categoria categoria = null;
-        Query q = em.createQuery("SELECT u FROM Categoria u "
-                + " WHERE u.nombre LIKE :nombre ")
-                .setParameter("nombre", par.getNombreCategoria());
+        Local local = null;
+        Query q = em.createQuery(" SELECT u FROM Local u ");
         try {
-            categoria = (Categoria) q.getSingleResult();
+            local = (Local) q.getSingleResult();
         } catch (NonUniqueResultException e) {
-            categoria = (Categoria) q.getResultList().get(0);
+            local = (Local) q.getResultList().get(0);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             em.close();
-            return categoria;
+            return local;
         }
     }
     
-    public List<Categoria> leer() {
+    public Local leer(Local par) {
         EntityManager em = emf.createEntityManager();
-        List<Categoria> categoria = null;
-        Query q = em.createQuery("SELECT u FROM Categoria u ");
+        Local local = null;
+        System.out.println(par.getContraseña());
+        Query q = em.createQuery(" SELECT u FROM Local u " + 
+                " WHERE u.nombreAdministrador LIKE :nombreAdministrador " + 
+                " AND u.contraseña LIKE :contraseña ")
+                .setParameter("nombreAdministrador", par.getNombreAdministrador())
+                .setParameter("contraseña", par.getContraseña());
         try {
-            categoria = (List<Categoria>) q.getResultList();
+            local = (Local) q.getSingleResult();
+        } catch (NonUniqueResultException e) {
+            local = (Local) q.getResultList().get(0);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             em.close();
-            return categoria;
+            return local;
         }
     }
     
-    public boolean actualizar(Categoria objeto) {
+    public boolean actualizar(Local nuevoObjeto) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+        Local object;
         boolean ret = false;
         try {
-            objeto = leer(objeto);
-            em.merge(objeto);
+            object = leer();
+            object.setRazonSocial(nuevoObjeto.getRazonSocial());
+            object.setDirecccion(nuevoObjeto.getDirecccion());
+            object.setContacto(nuevoObjeto.getContacto());
+            object.setNombreAdministrador(nuevoObjeto.getNombreAdministrador());
+            object.setContraseña(nuevoObjeto.getContraseña());
+            em.merge(object);
             em.getTransaction().commit();
             ret = true;
         } catch (Exception e) {
@@ -84,5 +94,4 @@ public class CategoriaDAO {
             return ret;
         }
     }
-
 }
