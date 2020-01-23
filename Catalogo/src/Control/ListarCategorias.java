@@ -7,8 +7,7 @@ package Control;
 
 import DAO.CategoriaDAO;
 import Entidad.Categoria;
-import Entidad.Producto;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,9 +17,9 @@ public class ListarCategorias {
     
     private CategoriaDAO dao = new CategoriaDAO();
     
-    public ArrayList<Categoria> validarLista(){
-        ArrayList<Categoria> categorias;
-        categorias = (ArrayList<Categoria>) dao.leer();
+    public List<Categoria> validarLista(){
+        List<Categoria>categorias;
+        categorias = (List<Categoria>) dao.leer();
         return categorias;
     }
 }

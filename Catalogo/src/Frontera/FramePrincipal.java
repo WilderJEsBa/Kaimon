@@ -6,9 +6,7 @@
 package Frontera;
 
 import Control.ValidarLogin;
-import DAO.LocalDAO;
 import Entidad.Local;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**

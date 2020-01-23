@@ -69,6 +69,20 @@ public class ProductoDAO {
             return productos;
         }
     }
+    
+    public List<Producto> leer() {
+        EntityManager em = emf.createEntityManager();
+        List<Producto> productos = null;
+        TypedQuery<Producto> q = em.createQuery("SELECT u FROM Producto u ", Producto.class);
+        try {
+            productos =  q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+            return productos;
+        }
+    }
 
     public boolean actualizar(Producto object, Producto nuevoObjecto) {
         EntityManager em = emf.createEntityManager();
@@ -76,7 +90,7 @@ public class ProductoDAO {
         boolean ret = false;
         try {
             object = leer(object);
-            object.setDescripcion(nuevoObjecto.getNombreProducto());
+            object.setDescripcion(nuevoObjecto.getDescripcion());
             object.setPrecio(nuevoObjecto.getPrecio());
             em.merge(object);
             em.getTransaction().commit();

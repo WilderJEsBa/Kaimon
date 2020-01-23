@@ -12,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -39,7 +40,7 @@ public class CategoriaDAO {
         EntityManager em = emf.createEntityManager();
         Categoria categoria = null;
         Query q = em.createQuery("SELECT u FROM Categoria u "
-                + " WHERE u.nombre LIKE :nombre ")
+                + " WHERE u.nombreCategoria LIKE :nombre ")
                 .setParameter("nombre", par.getNombreCategoria());
         try {
             categoria = (Categoria) q.getSingleResult();
@@ -55,15 +56,15 @@ public class CategoriaDAO {
     
     public List<Categoria> leer() {
         EntityManager em = emf.createEntityManager();
-        List<Categoria> categoria = null;
-        Query q = em.createQuery("SELECT u FROM Categoria u ");
+        List<Categoria> productos = null;
+        TypedQuery<Categoria> q = em.createQuery("SELECT u FROM Categoria u ", Categoria.class);
         try {
-            categoria = (List<Categoria>) q.getResultList();
+            productos =  q.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             em.close();
-            return categoria;
+            return productos;
         }
     }
     

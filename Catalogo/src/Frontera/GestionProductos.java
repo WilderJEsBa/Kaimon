@@ -5,10 +5,14 @@
  */
 package Frontera;
 
+import Control.AgregarCategoria;
+import Control.AgregarProducto;
 import Control.BuscarProducto;
+import Control.ListarCategorias;
+import Entidad.Categoria;
 import Entidad.Producto;
-import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,28 +36,89 @@ public class GestionProductos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        categoriasDialog = new javax.swing.JDialog();
-        PanelMostrarCategorias = new javax.swing.JPanel();
+        agregarProductoDialog = new javax.swing.JDialog();
+        nombreL = new javax.swing.JLabel();
+        descripcionL = new javax.swing.JLabel();
+        precioL = new javax.swing.JLabel();
+        nombreTF = new javax.swing.JTextField();
+        descripcionTF = new javax.swing.JTextField();
+        infoL = new javax.swing.JLabel();
+        agregarB = new javax.swing.JButton();
+        precioS = new javax.swing.JSpinner();
         panelBuscar = new javax.swing.JPanel();
         buscarProductosB = new javax.swing.JButton();
         buscarProductosTF = new javax.swing.JTextField();
-        mostrarCategoriasB = new javax.swing.JButton();
         registrarCategoriaB = new javax.swing.JButton();
         registrarProductoB = new javax.swing.JButton();
-        mostrarProductosSP = new javax.swing.JScrollPane();
-        panelMostrarProductos = new javax.swing.JPanel();
+        categoriasB = new javax.swing.JButton();
+        mostrarSP = new javax.swing.JScrollPane();
+        panelMostrar = new javax.swing.JPanel();
 
-        PanelMostrarCategorias.setLayout(new java.awt.GridLayout(1, 0));
+        agregarProductoDialog.setMinimumSize(new java.awt.Dimension(400, 216));
 
-        javax.swing.GroupLayout categoriasDialogLayout = new javax.swing.GroupLayout(categoriasDialog.getContentPane());
-        categoriasDialog.getContentPane().setLayout(categoriasDialogLayout);
-        categoriasDialogLayout.setHorizontalGroup(
-            categoriasDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMostrarCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        nombreL.setText("Nombre");
+
+        descripcionL.setText("Descripción");
+
+        precioL.setText("Precio");
+
+        infoL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoL.setText("Ingrese los datos del nuevo producto");
+
+        agregarB.setText("Agregar");
+        agregarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarBActionPerformed(evt);
+            }
+        });
+
+        precioS.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        javax.swing.GroupLayout agregarProductoDialogLayout = new javax.swing.GroupLayout(agregarProductoDialog.getContentPane());
+        agregarProductoDialog.getContentPane().setLayout(agregarProductoDialogLayout);
+        agregarProductoDialogLayout.setHorizontalGroup(
+            agregarProductoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarProductoDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(agregarProductoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(infoL, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                    .addGroup(agregarProductoDialogLayout.createSequentialGroup()
+                        .addComponent(precioL, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(precioS))
+                    .addGroup(agregarProductoDialogLayout.createSequentialGroup()
+                        .addComponent(descripcionL, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(descripcionTF))
+                    .addGroup(agregarProductoDialogLayout.createSequentialGroup()
+                        .addComponent(nombreL, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombreTF))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agregarProductoDialogLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(agregarB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-        categoriasDialogLayout.setVerticalGroup(
-            categoriasDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMostrarCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        agregarProductoDialogLayout.setVerticalGroup(
+            agregarProductoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarProductoDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(infoL, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(agregarProductoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreL, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombreTF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(agregarProductoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(descripcionL, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descripcionTF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(agregarProductoDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(precioL, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(precioS, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(agregarB, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         buscarProductosB.setText("Buscar");
@@ -65,11 +130,26 @@ public class GestionProductos extends javax.swing.JPanel {
 
         buscarProductosTF.setText("producto");
 
-        mostrarCategoriasB.setText("Categorías");
-
         registrarCategoriaB.setText("+");
+        registrarCategoriaB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarCategoriaBActionPerformed(evt);
+            }
+        });
 
         registrarProductoB.setText("+");
+        registrarProductoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarProductoBActionPerformed(evt);
+            }
+        });
+
+        categoriasB.setText("Categorias");
+        categoriasB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriasBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBuscarLayout = new javax.swing.GroupLayout(panelBuscar);
         panelBuscar.setLayout(panelBuscarLayout);
@@ -77,7 +157,7 @@ public class GestionProductos extends javax.swing.JPanel {
             panelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBuscarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mostrarCategoriasB)
+                .addComponent(categoriasB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(registrarCategoriaB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
@@ -95,14 +175,14 @@ public class GestionProductos extends javax.swing.JPanel {
                 .addGroup(panelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buscarProductosB)
                     .addComponent(buscarProductosTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mostrarCategoriasB)
                     .addComponent(registrarCategoriaB)
-                    .addComponent(registrarProductoB))
+                    .addComponent(registrarProductoB)
+                    .addComponent(categoriasB))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        panelMostrarProductos.setLayout(new java.awt.GridLayout());
-        mostrarProductosSP.setViewportView(panelMostrarProductos);
+        panelMostrar.setLayout(new java.awt.GridLayout(1, 0));
+        mostrarSP.setViewportView(panelMostrar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -111,7 +191,7 @@ public class GestionProductos extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(mostrarProductosSP)
+                    .addComponent(mostrarSP)
                     .addComponent(panelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -121,38 +201,86 @@ public class GestionProductos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mostrarProductosSP, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mostrarSP, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarProductosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProductosBActionPerformed
+        panelMostrar.setVisible(false);
+        panelMostrar.removeAll();
+        panelMostrar.setVisible(true);
+        
         String busqueda = buscarProductosTF.getText();
         BuscarProducto buscar = new BuscarProducto();
         List<Producto> resultado = buscar.realizarBusqueda(busqueda);
         
         for(Producto p : resultado){
-            ProductoPanel panelMostrar = new ProductoPanel();
-            panelMostrar.getNombreL().setText(p.getNombreProducto());
-            panelMostrar.getDescripcionL().setText(p.getDescripcion());
-            panelMostrar.getPrecioL().setText(String.valueOf(p.getPrecio()));
-            panelMostrarProductos.setVisible(false);
-            panelMostrarProductos.add(panelMostrar);
-            panelMostrarProductos.setVisible(true); 
+            ProductoPanel mostrar = new ProductoPanel(p);
+            panelMostrar.setVisible(false);
+            panelMostrar.add(mostrar);
+            panelMostrar.setVisible(true); 
         }
-        
     }//GEN-LAST:event_buscarProductosBActionPerformed
+
+    private void registrarCategoriaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarCategoriaBActionPerformed
+        String nombreCategoria = JOptionPane.showInputDialog("Ingresa el nombre de la nueva categoria");
+        Categoria nueva = new Categoria();
+        nueva.setNombreCategoria(nombreCategoria);
+        AgregarCategoria agregar = new AgregarCategoria();
+        String resultado = agregar.validarAgregarCategoria(nueva);
+        JOptionPane.showMessageDialog(this, resultado, "Información", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_registrarCategoriaBActionPerformed
+
+    private void registrarProductoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoBActionPerformed
+        agregarProductoDialog.setVisible(true);
+    }//GEN-LAST:event_registrarProductoBActionPerformed
+
+    private void agregarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBActionPerformed
+        Producto nuevo = new Producto();
+        nuevo.setNombreProducto(nombreTF.getText());
+        nuevo.setDescripcion(descripcionTF.getText());
+        nuevo.setPrecio((int) precioS.getValue());
+
+        AgregarProducto agregar = new AgregarProducto();
+        String resultado = agregar.validarAgregarProducto(nuevo);
+        JOptionPane.showMessageDialog(this, resultado, "Información", JOptionPane.INFORMATION_MESSAGE);
+        agregarProductoDialog.setVisible(false);
+    }//GEN-LAST:event_agregarBActionPerformed
+
+    private void categoriasBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriasBActionPerformed
+        panelMostrar.setVisible(false);
+        panelMostrar.removeAll();
+        panelMostrar.setVisible(true);
+        
+        ListarCategorias listar = new ListarCategorias();
+        List<Categoria> resultado = listar.validarLista();
+        
+        for(Categoria c : resultado){
+            CategoriaPanel mostrar = new CategoriaPanel(c);
+            panelMostrar.setVisible(false);
+            panelMostrar.add(mostrar);
+            panelMostrar.setVisible(true); 
+        }
+    }//GEN-LAST:event_categoriasBActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelMostrarCategorias;
+    private javax.swing.JButton agregarB;
+    private javax.swing.JDialog agregarProductoDialog;
     private javax.swing.JButton buscarProductosB;
     private javax.swing.JTextField buscarProductosTF;
-    private javax.swing.JDialog categoriasDialog;
-    private javax.swing.JButton mostrarCategoriasB;
-    private javax.swing.JScrollPane mostrarProductosSP;
+    private javax.swing.JButton categoriasB;
+    private javax.swing.JLabel descripcionL;
+    private javax.swing.JTextField descripcionTF;
+    private javax.swing.JLabel infoL;
+    private javax.swing.JScrollPane mostrarSP;
+    private javax.swing.JLabel nombreL;
+    private javax.swing.JTextField nombreTF;
     private javax.swing.JPanel panelBuscar;
-    private javax.swing.JPanel panelMostrarProductos;
+    private javax.swing.JPanel panelMostrar;
+    private javax.swing.JLabel precioL;
+    private javax.swing.JSpinner precioS;
     private javax.swing.JButton registrarCategoriaB;
     private javax.swing.JButton registrarProductoB;
     // End of variables declaration//GEN-END:variables

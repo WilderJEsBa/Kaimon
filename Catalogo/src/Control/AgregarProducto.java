@@ -21,7 +21,7 @@ public class AgregarProducto {
         if(!verificarLongitudNombre(producto.getNombreProducto())){
             return ("La longitud del nombre es incorrecta");
         }
-        if(!verificarProductoExiste(producto)){
+        if(verificarProductoExiste(producto)){
             return ("El producto ya existe");
         }
         if(!verificarLongitudDescripcion(producto.getDescripcion())){

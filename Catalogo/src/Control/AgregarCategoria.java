@@ -20,7 +20,7 @@ public class AgregarCategoria {
         if(!verificarLongitudNombre(categoria.getNombreCategoria())){
             return ("La longitud del nombre es incorrecta");
         }
-        if(!verificarCategoriaExiste(categoria)){
+        if(verificarCategoriaExiste(categoria)){
             return ("La categoria ya existe");
         }
         dao.crear(categoria);
@@ -34,4 +34,5 @@ public class AgregarCategoria {
     private boolean verificarCategoriaExiste(Categoria categoria){
         return (dao.leer(categoria) != null);
     }
+    
 }

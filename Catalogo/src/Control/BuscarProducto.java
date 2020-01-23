@@ -7,7 +7,6 @@ package Control;
 
 import DAO.ProductoDAO;
 import Entidad.Producto;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +19,12 @@ public class BuscarProducto {
     
     public List<Producto> realizarBusqueda(String busqueda){
         List<Producto> productos;
-        productos =  dao.leer(busqueda);
+        if(busqueda.equals("")){
+            productos = dao.leer();
+        }
+        else{
+            productos =  dao.leer(busqueda);
+        }
         return productos;
     }
     
