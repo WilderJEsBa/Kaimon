@@ -6,11 +6,14 @@
 package DAO;
 
 import Entidad.Existencia;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -49,6 +52,20 @@ public class ExistenciaDAO {
         } finally {
             em.close();
             return existencia;
+        }
+    }
+    
+    public List<Existencia> leer() {
+        EntityManager em = emf.createEntityManager();
+        List<Existencia> productos = null;
+        TypedQuery<Existencia> q = em.createQuery("SELECT u FROM Existencia u ", Existencia.class);
+        try {
+            productos =  q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+            return productos;
         }
     }
     

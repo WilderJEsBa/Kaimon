@@ -5,12 +5,23 @@
  */
 package Frontera;
 
+import Control.BuscarProducto;
+import Control.ModificarExistencias;
+import DAO.ExistenciaDAO;
+import Entidad.Existencia;
+import Entidad.Producto;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JPanel;
+
 /**
  *
  * @author wilde
  */
 public class GestionInventario extends javax.swing.JPanel {
 
+    private ArrayList<ExistenciaPanel> existencias;
+    
     /**
      * Creates new form GestionInventario
      */
@@ -27,55 +38,40 @@ public class GestionInventario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        existenciasSP = new javax.swing.JScrollPane();
-        existenciasT = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        comenzarDiaB = new javax.swing.JButton();
+        terminarDiaB = new javax.swing.JButton();
+        aplicarB = new javax.swing.JButton();
+        fechaL = new javax.swing.JLabel();
+        mostrarExistenciasSP = new javax.swing.JScrollPane();
+        mostrarExistenciasP = new javax.swing.JPanel();
 
-        existenciasT.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null}
-            },
-            new String [] {
-                "Codigo", "Producto", "Cantidad"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        existenciasSP.setViewportView(existenciasT);
-
-        jButton1.setText("Comenzar dia");
-
-        jButton2.setText("Terminar dia");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        comenzarDiaB.setText("Comenzar dia");
+        comenzarDiaB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                comenzarDiaBActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Aplicar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        terminarDiaB.setText("Terminar dia");
+        terminarDiaB.setEnabled(false);
+        terminarDiaB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                terminarDiaBActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Fecha");
+        aplicarB.setText("Aplicar");
+        aplicarB.setEnabled(false);
+        aplicarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aplicarBActionPerformed(evt);
+            }
+        });
+
+        fechaL.setText("Fecha");
+
+        mostrarExistenciasP.setLayout(new java.awt.GridLayout(0, 1));
+        mostrarExistenciasSP.setViewportView(mostrarExistenciasP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -83,16 +79,16 @@ public class GestionInventario extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(existenciasSP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(mostrarExistenciasSP, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comenzarDiaB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 410, Short.MAX_VALUE)
+                        .addComponent(terminarDiaB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(fechaL, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(aplicarB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,33 +96,63 @@ public class GestionInventario extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(existenciasSP, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                    .addComponent(comenzarDiaB, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(terminarDiaB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(mostrarExistenciasSP, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(aplicarB, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(fechaL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void aplicarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarBActionPerformed
+        ModificarExistencias modificar = new ModificarExistencias();
+        for(ExistenciaPanel p : existencias){
+            Existencia nuevo = new Existencia();
+            nuevo.setCantidad((int) p.getCantidadS().getValue());
+            modificar.validarmodificarExistencias(p.getExistencia(), nuevo);
+        }
+    }//GEN-LAST:event_aplicarBActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void terminarDiaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarDiaBActionPerformed
+        comenzarDiaB.setEnabled(true);
+        terminarDiaB.setEnabled(false);
+        aplicarB.setEnabled(false);
+    }//GEN-LAST:event_terminarDiaBActionPerformed
+
+    private void comenzarDiaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comenzarDiaBActionPerformed
+        existencias = new ArrayList<>();
+        Date hoy = new Date();
+        BuscarProducto buscar = new BuscarProducto();
+        ExistenciaDAO dao = new ExistenciaDAO();
+        for(Producto p : buscar.realizarBusqueda("")){
+            Existencia existencia = new Existencia();
+            existencia.setFecha(hoy);
+            existencia.setProducto(p);
+            dao.crear(existencia);
+        }
+        for(Existencia e : dao.leer()){
+            ExistenciaPanel mostrar = new ExistenciaPanel(e);
+            mostrarExistenciasP.setVisible(false);
+            mostrarExistenciasP.add(mostrar);
+            existencias.add(mostrar);
+            mostrarExistenciasP.setVisible(true);
+        }
+        comenzarDiaB.setEnabled(false);
+        terminarDiaB.setEnabled(true);
+        aplicarB.setEnabled(true);
+    }//GEN-LAST:event_comenzarDiaBActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane existenciasSP;
-    private javax.swing.JTable existenciasT;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton aplicarB;
+    private javax.swing.JButton comenzarDiaB;
+    private javax.swing.JLabel fechaL;
+    private javax.swing.JPanel mostrarExistenciasP;
+    private javax.swing.JScrollPane mostrarExistenciasSP;
+    private javax.swing.JButton terminarDiaB;
     // End of variables declaration//GEN-END:variables
 }

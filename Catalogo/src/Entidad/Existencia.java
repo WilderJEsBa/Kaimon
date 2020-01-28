@@ -6,7 +6,6 @@
 package Entidad;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -28,7 +28,8 @@ public class Existencia implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigoExistencia;
     private int cantidad;
-    //private Date fecha;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha;
     
     @ManyToOne(targetEntity=Producto.class )
     private Producto producto;
@@ -53,7 +54,6 @@ public class Existencia implements Serializable{
         this.cantidad = cantidad;
     }
 
-    /*
     public Date getFecha() {
         return fecha;
     }
@@ -61,7 +61,6 @@ public class Existencia implements Serializable{
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    */
     
     public Producto getProducto() {
         return producto;
@@ -70,7 +69,5 @@ public class Existencia implements Serializable{
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-    
-    
     
 }

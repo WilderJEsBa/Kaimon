@@ -6,7 +6,6 @@
 package Control;
 
 import DAO.ProductoDAO;
-import Entidad.Categoria;
 import Entidad.Producto;
 
 /**

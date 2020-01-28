@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class ProductoPanel extends javax.swing.JPanel {
     
-    Producto producto;
+    private Producto producto;
 
     /**
      * Creates new form Producto

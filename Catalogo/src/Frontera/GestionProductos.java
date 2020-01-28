@@ -181,7 +181,7 @@ public class GestionProductos extends javax.swing.JPanel {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        panelMostrar.setLayout(new java.awt.GridLayout(1, 0));
+        panelMostrar.setLayout(new java.awt.GridLayout(1, 0, 5, 5));
         mostrarSP.setViewportView(panelMostrar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
