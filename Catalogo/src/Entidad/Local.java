@@ -18,7 +18,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table (name="local")
+@Table (name="locals")
 public class Local implements Serializable{
     
     @Id
@@ -30,7 +30,12 @@ public class Local implements Serializable{
     private String contraseña;
     private String nombreAdministrador;
 
-    public Local() {
+    public int getIdLocal() {
+        return idLocal;
+    }
+
+    public void setIdLocal(int idLocal) {
+        this.idLocal = idLocal;
     }
 
     public String getRazonSocial() {
@@ -71,14 +76,6 @@ public class Local implements Serializable{
 
     public void setNombreAdministrador(String nombreAdministrador) {
         this.nombreAdministrador = nombreAdministrador;
-    }
-    
-    public int getIdLocal() {
-        return idLocal;
-    }
-
-    public void setIdLocal(int idLocal) {
-        this.idLocal = idLocal;
     }
     
 }

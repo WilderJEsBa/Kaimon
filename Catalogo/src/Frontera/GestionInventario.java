@@ -7,12 +7,9 @@ package Frontera;
 
 import Control.BuscarProducto;
 import Control.ModificarExistencias;
-import DAO.ExistenciaDAO;
-import Entidad.Existencia;
 import Entidad.Producto;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.JPanel;
 
 /**
  *
@@ -27,6 +24,10 @@ public class GestionInventario extends javax.swing.JPanel {
      */
     public GestionInventario() {
         initComponents();
+        this.setVisible(false);
+        Date hoy = new Date();
+        fechaL.setText(hoy.toString());
+        this.setVisible(true);
     }
 
     /**
@@ -111,9 +112,7 @@ public class GestionInventario extends javax.swing.JPanel {
     private void aplicarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarBActionPerformed
         ModificarExistencias modificar = new ModificarExistencias();
         for(ExistenciaPanel p : existencias){
-            Existencia nuevo = new Existencia();
-            nuevo.setCantidad((int) p.getCantidadS().getValue());
-            modificar.validarmodificarExistencias(p.getExistencia(), nuevo);
+            modificar.validarmodificarExistencias(p.getProducto(), (int) p.getCantidadS().getValue());
         }
     }//GEN-LAST:event_aplicarBActionPerformed
 
@@ -125,17 +124,9 @@ public class GestionInventario extends javax.swing.JPanel {
 
     private void comenzarDiaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comenzarDiaBActionPerformed
         existencias = new ArrayList<>();
-        Date hoy = new Date();
         BuscarProducto buscar = new BuscarProducto();
-        ExistenciaDAO dao = new ExistenciaDAO();
         for(Producto p : buscar.realizarBusqueda("")){
-            Existencia existencia = new Existencia();
-            existencia.setFecha(hoy);
-            existencia.setProducto(p);
-            dao.crear(existencia);
-        }
-        for(Existencia e : dao.leer()){
-            ExistenciaPanel mostrar = new ExistenciaPanel(e);
+            ExistenciaPanel mostrar = new ExistenciaPanel(p);
             mostrarExistenciasP.setVisible(false);
             mostrarExistenciasP.add(mostrar);
             existencias.add(mostrar);

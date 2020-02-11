@@ -5,7 +5,7 @@
  */
 package Frontera;
 
-import Entidad.Existencia;
+import Entidad.Producto;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 
@@ -15,17 +15,17 @@ import javax.swing.JSpinner;
  */
 public class ExistenciaPanel extends javax.swing.JPanel {
 
-    private Existencia existencia;
+    private Producto producto;
     
     /**
      * Creates new form ExistenciaPanel
-     * @param ex
+     * @param p
      */
-    public ExistenciaPanel(Existencia ex) {
+    public ExistenciaPanel(Producto p) {
         initComponents();
-        existencia = ex;
-        productoL.setText(ex.getProducto().getNombreProducto());
-        cantidadS.setValue(ex.getCantidad());
+        producto = p;
+        productoL.setText(p.getNombreProducto());
+        cantidadS.setValue(p.getCantidad());
     }
 
     /**
@@ -66,14 +66,14 @@ public class ExistenciaPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public Existencia getExistencia() {
-        return existencia;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setExistencia(Existencia existencia) {
-        this.existencia = existencia;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
-
+    
     public JSpinner getCantidadS() {
         return cantidadS;
     }

@@ -26,11 +26,11 @@ public class Producto implements Serializable{
     private int codigoProducto;
     private String nombreProducto;
     private String descripcion;
+    private int cantidad;
     private int precio;
-    
-    @ManyToOne(targetEntity=Categoria.class )
+    @ManyToOne(targetEntity=Categoria.class)
     private Categoria categoria;
-    
+
     public int getCodigoProducto() {
         return codigoProducto;
     }
@@ -53,6 +53,14 @@ public class Producto implements Serializable{
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public int getPrecio() {

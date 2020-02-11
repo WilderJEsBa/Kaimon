@@ -7,7 +7,11 @@ package Frontera;
 
 import Control.ValidarLogin;
 import Entidad.Local;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -15,15 +19,28 @@ import javax.swing.JOptionPane;
  */
 public class FramePrincipal extends javax.swing.JFrame {
 
-    private GestionProductos gestionProductos = new GestionProductos();
-    private GestionInventario gestionInventario = new GestionInventario();
-    private GestionLocal gestionLocal = new GestionLocal();
+    private final GestionProductos gestionProductos = new GestionProductos();
+    private final GestionInventario gestionInventario = new GestionInventario();
+    private final GestionLocal gestionLocal = new GestionLocal();
+    private final Pedidos pedidos = new Pedidos();
+    private final Estadisticas estadisticas = new Estadisticas();
     
     /**
      * Creates new form FramePrincipal
      */
     public FramePrincipal() {
         initComponents();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -156,6 +173,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         pedidosB.setFocusable(false);
         pedidosB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         pedidosB.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        pedidosB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pedidosBActionPerformed(evt);
+            }
+        });
         menuToolBaar.add(pedidosB);
 
         estadisticasB.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -164,6 +186,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         estadisticasB.setFocusable(false);
         estadisticasB.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         estadisticasB.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        estadisticasB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadisticasBActionPerformed(evt);
+            }
+        });
         menuToolBaar.add(estadisticasB);
 
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
@@ -226,6 +253,8 @@ public class FramePrincipal extends javax.swing.JFrame {
             gestionProductosB.setEnabled(true);
             gestionInventarioB.setEnabled(true);
             gestionLocalB.setEnabled(true);
+            pedidosB.setEnabled(true);
+            estadisticasB.setEnabled(true);
             panelPrincipal.setVisible(false);
             panelPrincipal.removeAll();
             panelPrincipal.setVisible(true);
@@ -238,6 +267,20 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelPrincipal.add(gestionLocal);
         panelPrincipal.setVisible(true);
     }//GEN-LAST:event_gestionLocalBActionPerformed
+
+    private void pedidosBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidosBActionPerformed
+        panelPrincipal.setVisible(false);
+        panelPrincipal.removeAll();
+        panelPrincipal.add(pedidos);
+        panelPrincipal.setVisible(true);
+    }//GEN-LAST:event_pedidosBActionPerformed
+
+    private void estadisticasBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasBActionPerformed
+        panelPrincipal.setVisible(false);
+        panelPrincipal.removeAll();
+        panelPrincipal.add(estadisticas);
+        panelPrincipal.setVisible(true);
+    }//GEN-LAST:event_estadisticasBActionPerformed
 
     /**
      * @param args the command line arguments

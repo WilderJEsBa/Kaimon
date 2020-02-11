@@ -5,9 +5,8 @@
  */
 package Control;
 
-import DAO.ExistenciaDAO;
-import Entidad.Existencia;
-import java.util.Date;
+import DAO.ProductoDAO;
+import Entidad.Producto;
 
 /**
  *
@@ -15,18 +14,17 @@ import java.util.Date;
  */
 public class ModificarExistencias {
     
-    private ExistenciaDAO dao = new ExistenciaDAO();
+    private ProductoDAO dao = new ProductoDAO();
     
-    public String validarmodificarExistencias(Existencia existencia, Existencia nuevo){
-        if(!verificarCantidadExistencia(nuevo.getCantidad())){
+    public String validarmodificarExistencias(Producto producto, int cantidad){
+        if(!verificarCantidadProducto(cantidad)){
             return ("La cantidad es incorrecta");
         }
-        System.out.println(existencia.getCodigoExistencia());
-        dao.actualizar(existencia, nuevo);
+        dao.actualizarExistencia(producto, cantidad);
         return ("Modificacion exitosa");
     }
     
-    private boolean verificarCantidadExistencia(int cantidad){
+    private boolean verificarCantidadProducto(int cantidad){
         return (cantidad >= 0);
     }
 }

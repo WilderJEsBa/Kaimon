@@ -29,15 +29,6 @@ public class TestAgregarCategoria {
 
     @BeforeClass
     public static void setUpClass() {
-        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
-        Categoria a = new Categoria();
-        Categoria b = new Categoria();
-
-        a.setNombreCategoria("Hamburguesa");
-        b.setNombreCategoria("Perro caliente");
-
-        categorias.add(a);
-        categorias.add(b);
 
     }
 
@@ -64,17 +55,12 @@ public class TestAgregarCategoria {
     @Test
     public void TestCategoriaRepetida(){
         Categoria u = new Categoria(); 
-        u.setNombreCategoria("Hamburguesa");
+        u.setNombreCategoria("Hamburguesa 100g");
         assertEquals(agregarCategoria.validarAgregarCategoria(u), CATEGORIA_REPETIDA );
-        u.setNombreCategoria("Perro Caliente");
+        u.setNombreCategoria("Perro caliente");
         assertEquals(agregarCategoria.validarAgregarCategoria(u), CATEGORIA_REPETIDA );
         
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //        u.setNombreCategoria(agregarCategoria.validarAgregarCategoria(u));
-
-    // @Test
-    // public void hello() {}
+   
 }

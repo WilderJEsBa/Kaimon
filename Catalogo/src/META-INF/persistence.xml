@@ -4,8 +4,9 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Entidad.Producto</class>
     <class>Entidad.Categoria</class>
-    <class>Entidad.Existencia</class>
     <class>Entidad.Local</class>
+    <class>Entidad.Pedido</class>
+    <class>Entidad.PedidoItem</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/CatalogoDB"/>
       <property name="javax.persistence.jdbc.user" value="teamingesofti"/>

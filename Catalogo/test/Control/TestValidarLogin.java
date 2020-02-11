@@ -22,24 +22,17 @@ import static org.junit.Assert.*;
 public class TestValidarLogin {
     
     private static ValidarLogin validarLogin = new  ValidarLogin();
-    private String LONG_NOMBRE_INCORRECTA= "Longitud nombre incorrecta";
-    private String LONG_PASSWORD_INCORRECTA= "Longitud contraseña incorrecta";
-    private String USUARIO_AUTORIZADO ="Bienvenido";
+    private String LONG_NOMBRE_INCORRECTA= "La longitud del nombre del administrador es incorrecta";
+    private String LONG_PASSWORD_INCORRECTA= "La longitud de la contraseña es incorrecta";
+    private String USUARIO_AUTORIZADO ="Ingreso exitoso";
     private String DATOS_INCORRECTOS = "Datos incorrectos";
-   
-   
     
     public TestValidarLogin() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-        ArrayList<Local> local = new ArrayList<Local>();
-        Local a = new Local();        
-        a.setNombreAdministrador("administrador");
-        a.setContraseña("admin");
-        local.add(a);
-      
+
     }
     
     @AfterClass
@@ -86,14 +79,7 @@ public class TestValidarLogin {
     } 
  
     
-    @Test
-    public void testTodoCorrecto(){
-        Local u = new Local();
-        u.setNombreAdministrador("administrador");
-        u.setContraseña("admin");
-        assertEquals(validarLogin.verificarLogin(u),USUARIO_AUTORIZADO);                              
-        
-        
+   
         
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
@@ -101,4 +87,4 @@ public class TestValidarLogin {
     // @Test
     // public void hello() {}
 }
-}
+
